@@ -1,0 +1,195 @@
+一、指针
+
+指针是一个特殊的变量，它里面存储的数值被解释成为内存里的一个地址。 要搞清一个指针需要搞清指针的四方面的内容：
+1.指针的类型
+2.指针所指向的类型
+3.指针的值或者叫指针所指向的内存区
+4.还有指针本身所占据的内存区
+先声明几个指针放着做例子：
+例一：
+(1)int *ptr;
+(2)char *ptr;
+(3)int **ptr;
+(4)int (*ptr)[3];
+(5)int *(*ptr)[4];
+1.1 指针的类型
+      从语法的角度看，你只要把指针声明语句里的指针名字去掉，剩下的部分就是这个指针的类型。这是指针本身所具有的类型。所以分析下例一中各个指针的类型：
+(1)int *ptr; //指针的类型是int *
+(2)char *ptr; //指针的类型是char *
+(3)int **ptr; //指针的类型是 int **
+(4)int (*ptr)[3]; //指针的类型是 int(*)[3]
+(5)int *(*ptr)[4]; //指针的类型是 int *(*)[4]
+所以找出指针的类型的方法是不是很简单？
+1.2 指针所指向的类型
+     当你通过指针来访问指针所指向的内存区时，指针所指向的类型决定了编译器将把那片内存区里的内容当做什么来看待。从语法上看，你只须把指针声明语句中的指针名字和名字左边的指针声明符 *去掉，剩下的就是指针所指向的类型。例如：
+(1)int *ptr; //指针所指向的类型是int
+(2)char *ptr; //指针所指向的的类型是char
+(3)int **ptr; //指针所指向的的类型是 int *
+(4)int (*ptr)[3]; //指针所指向的的类型是 int()[3]
+(5)int *(*ptr)[4]; //指针所指向的的类型是 int *()[4]
+在指针的算术运算中，指针所指向的类型有很大的作用。
+    指针的类型(即指针本身的类型)和指针所指向的类型是两个概念。当对C越来越熟悉时，你会发现，把与指针搅和在一起的“类型”这个概念分成“指针的 类型”和“指针所指向的类型”两个概念，是精通指针的关键点之一。有些教材书上写得很差，就把指针的这两个概念搅在一起了，所以看起书来前后矛盾，越看越糊涂。
+
+
+
+
+
+
+二、常量指针与指针常量
+
+常量指针是指--指向常量的指针，顾名思义，就是指针指向的是常量，即，它不能指向变量，它指向的内容不能被改变，不能通过指针来修改它指向的内容，但是指针自身不是常量，它自身的值可以改变，从而指向另一个常量。
+指针常量是指--指针本身是常量。它指向的地址是不可改变的，但地址里的内容可以通过指针改变。它指向的地址将伴其一生，直到生命周期结束。有一点需要注意的是，指针常量在定义时必须同时赋初值。
+注：也有人将这两个名称的定义与含义反过来认为：“指针常量：顾名思义它的中心词是“常量”这是重点，指针就是一个修饰的作用。所以这里的指针还是一个变量，它的内容存放的是常量的地址。常量指针：关键字是指针，它是不能被改变的，因为指针总是指向地址的，所以它的意思是它指向的地址是不能被改变的”。但我个人认为后者不合理，所以使用前者。
+2.使用方法：
+使用时写法上的区别：常量指针：const在*之前   指针常量：const在*之后。
+  当然我们也可以定义常量指针常量，那就需要加上两个const，一前一后！以上只是从定义上给出两者的本质上的不同，在具体使用上，还有很多变化，但万变不离其宗，我们可以根据它的原理分析出各种复杂用法的实质。
+3. 使用举例
+3.1 常量指针使用：
+如intb, c;
+int const *a; 
+a = &b;
+a = &c;
+都可以，唯独它指向的内存不能被修改。如：*a=20;这是违法的！错误！
+3.2 指针常量使用
+如Inta;
+Int aTest;
+Int * const p =&a;
+表示p是一个常量指针它指向变量a的内存。指针常量不能再用p指向其他变量，如p= & aTest; 错误！可以修改指向内存的值，如:*p = 20;指针常量声明的时候必须向我那样赋初值。
+指针常量也不能释放,用p指向NULL，即
+p= NULL;
+会在编译时报错
+/opt/test/test.c:649:error: assignment of read-only variable`p'
+还有一个记住他们不同形式的技巧！看const关键字，他后面的不可修改，如int* const a = &b; 后面是a,则说明a不能修改！
+intconst * a = &b;后面是*a则说明*a不可被修改！
+在好多书上或MSDN是经常用constint a=5; int b=6; const int *p=&b; 
+其实constint*和intconst*一样，就是常量指针也就是它所指向的数据（在这是int）是常量，它自己的数据类型是constint*
+还有constint *p=&b;是可以的虽然b不是常量。但是constint a=6; int *p=&a;会报错，因为它消除了a的const属性
+4.使用技巧
+使用指针常量可以增加代码的可靠性和执行效率。
+如Inta;
+Int * const p =&a;
+增加可靠性：不用担心p被修改或释放导致非预期结果；
+增加执行效率：不用在子函数中对p做为空检查可以提高效率。
+
+
+
+
+
+
+
+
+
+三、对"typedef int (*funcptr)();" 的理解
+
+它定义了一个类型funcptr，表示指向返回值为int型（参数未指明）的函数的指针。它可以用来声明一个或多个函数指针。
+	funcptr fp1, fp2;
+这个声明等价于以下这种更冗长而且可能更难理解的写法：
+	int (*fp1)(), (*fp2)();
+
+
+
+
+
+
+四、weak_alias和strong_alias
+
+=========================     [glibc/include/libc-symblos.h]     ===========================
+
+#ifndef __ASSEMBLER__
+/* GCC understands weak symbols and aliases; use its interface where
+   possible, instead of embedded assembly language.  */
+
+/* Define ALIASNAME as a strong alias for NAME.  */
+# define strong_alias(name, aliasname) _strong_alias(name, aliasname)
+# define _strong_alias(name, aliasname) \
+  extern __typeof (name) aliasname __attribute__ ((alias (#name)));
+
+/* This comes between the return type and function name in
+   a function definition to make that definition weak.  */
+# define weak_function __attribute__ ((weak))
+# define weak_const_function __attribute__ ((weak, __const__))
+
+# ifdef HAVE_WEAK_SYMBOLS
+
+/* Define ALIASNAME as a weak alias for NAME.
+   If weak aliases are not available, this defines a strong alias.  */
+#  define weak_alias(name, aliasname) _weak_alias (name, aliasname)
+#  define _weak_alias(name, aliasname) \
+  extern __typeof (name) aliasname __attribute__ ((weak, alias (#name)));
+  
+/* Same as WEAK_ALIAS, but mark symbol as hidden.  */
+#  define weak_hidden_alias(name, aliasname) \
+  _weak_hidden_alias (name, aliasname)
+#  define _weak_hidden_alias(name, aliasname) \
+  extern __typeof (name) aliasname \
+    __attribute__ ((weak, alias (#name), __visibility__ ("hidden")));
+
+
+
+
+
+
+四、static、extern和const
+
+变量的定义一定也是变量的初始化，反之则不成立，在一定的作用域中，变量的声明可以有多个，但是定义只有一个
+
+    1. 变量在定义时分配内存空间，同时也可能赋予初值；
+    2. 变量在声明时不会分配内存空间，说明该变量时存在的，指出了该变量的名字和位置。其作用是声明该变量是已在程序后面定义的变量
+
+    extern int i;	声明外部变量
+    int i;		定义变量
+
+static的用法：
+    
+    1. 修饰函数，使其成为静态函数，在此static并非指存储方式，只是说明该函数的作用域只是局限于本文件；
+    2. 修饰局部变量，成为静态局部变量，存储在静态区，即使函数运行结束，静态变量的值不会被销毁，下次调用该函数时，值仍存在；
+    3. 修饰全局变量，成为静态全局变量，存储在静态区，作用域仅限于变量被定义的文件中，其他文件即使使用extern也无法调用。
+
+
+const修饰的只读变量与常量的区别：
+ 
+    1. 常量是一个静态的值，不需要分配内存，enum类型和#define（注意define不是关键字）宏声明一个常量；常量需要分配内存；
+    2. const修饰的只读变量不能用来作为定义数组的维数，也不能放在case关键字后面；
+    3. 常量是永远无法改变的，但是只读变量一般无法直接在此赋值，但是可以通过指针改变。
+
+const的好处:
+
+    1. 修饰函数的参数可以防止参数以外改动，增加程序的健壮性；
+    2. 修饰只读变量同时进行初始化，此后此常量不再改变，可以节省空间，避免不必要的内存空间分配，提高效率；
+    3. 修饰函数体时，表示是一个常函数，不能改变其中变量的值。
+
+
+
+使用extern static const定义全局变量的差异和用法：
+
+    1. 若要求某个文件中的全局变量是任何其他文件共享的，只要在头文件中extern声明一下，在某一个文件定义下，任何文件均可以共享这个全局变量；	在头文件中，只能对外部全局变量进行声明，而不能定义，否则，在编译过程中会提示出现重复定义的作物，因为多个.c文件都包含了头文件；
+    2. 若在定义全局变量前加static，说明该变量只有该文件内部可以使用，其他文件无法使用；
+        static和extern不能同时定义一个相同的变量；
+	用static定义的全局变量（函数），只作用在本文件中，其他文件不能使用；
+	一般static定义全局变量在源文件中，而不放置在头文件中；
+
+
+使用extern static const定义局部变量的差异和用法：
+
+    1. 用static定义局部变量时，改变了局部变量的生命周期（作用域仅限于函数）；
+    2. 普通的局部变量存放在内存的动态区（栈区），静态的局部变量存在内存的静态区，地址不再随着函数调用的结束而消失，而是等整个程序结束后才消失。
+    3. 不要extern在定义一个局部变量，没有意义
+
+关于const：
+
+    除了定义只读变量，可以用于修饰函数的参数，返回值，函数的定义体，以此来提高函数的健壮性。
+
+通常const只修饰作为输入的参数：
+
+    1. 参数为指针传递时：如：strcpy(char *strdes,const char*strsource);/*防止意外改动输入参数strsource的内容*/
+    2. 参数为至传递时：通常不用const修饰，会自动产生一个临时变量来复制输入参数，而不会改变原值。
+    3. 参数为引用传递时，情况通指针传递  void func(const int& a);
+
+用于修饰函数的返回值：
+
+    1. 若const 用于修饰指针传递方式的函数返回值，则返回指针值就不能被修改，同样要用const修饰的同类指针接受返回值；如： const int* String(int * r);  const int* p=String(ptr);
+    2. 若是值传递，返回值在临时的存储区，一般不用const修饰；
+    3. 若是引用传递，情况与指针类似，但是容易出错（慎用）；
+
+    内部函数 —— 一个函数只能被本文件调用，在定义和声明的时候加上关键字static，作用是多个文件中的同名函数不相互干扰；
+    外部函数 —— 可以被其他文件调用的函数，定义是加上关键字extern，在其他文件中用extern声明该函数。
