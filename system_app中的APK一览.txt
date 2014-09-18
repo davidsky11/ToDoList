@@ -1,0 +1,76 @@
+system\app中的APK一览
+
+程序位于：system\app
+
+序号	程序名	注释	可否删除	备注及建议
+1	AccountAndSyncSettings	同步与帐户设定	不推荐	该程序针对各个程序的自动网络同步，删除后可能会无法同步PC
+2	ApplicationsProvider	应用程序支持服务	不推荐	删除后会停止对应用软件的支持
+3	Bluetooth	蓝牙服务	否	未发现更适合的蓝牙程序
+4	BooksProvider	电子书数据存储	不推荐	删除后运行某些程序报错
+5	Browser	自带浏览器	不推荐	删除后点击自带桌面的浏览器报错
+6	Calculator	计算器	可	可替代
+7	Calendar	日历	可	可替代
+8	CalendarSync	日历同步	可	可同自带日历一起删除
+9	Camera	照相机	否	删除后摄像无法使用
+10	CertInstaller	证书安装服务	不推荐	删除后暂无不良
+11	Contacts	联系人	可	删除后暂无不良
+12	ContactsProvider	通讯录数据储存	否	测试删除后无法安装程序
+13	DefaultContainerService	默认通讯录服务	否	测试删除后无法安装程序
+14	DeskClock	桌面时钟	可	可替代
+15	DownloadProvider	下载提供	可	不用谷歌市场的可以删除
+16	DownloadProviderUi	下载管理	可	不用谷歌市场的可以删除
+17	DrmProvider	DRM受保护数据存储服务	可	删除后暂无不良
+18	Email	电子邮件	可	不用自带email接受邮件的可删
+19	EthernetSettings	以太网服务	否	删除后无法使用有线网络
+20	Explorer	资源浏览器	可	可替代，建议使用ES资源管理器
+21	flashplayer	flash插件	可	可自行安装更高级版本
+22	Gallery3D	3D相框	不推荐	删除后相机图库调用失败
+23	GenieWidget	天气与新闻	可	可替代，不用可删
+24	Gmail.apk	Gmail邮件	可	GOOGLE 服务软件
+25	GoogleBackupTransport	谷歌备份	可	GOOGLE 服务软件
+26	GoogleCalendarSyncAdapter	谷歌日历同步适配器	可	GOOGLE 服务软件
+27	GoogleContactsSyncAdapter	谷歌联系人同步适配器	可	GOOGLE 服务软件
+28	GooglePartnerSetup	Google合作伙伴设置	可	GOOGLE 服务软件
+29	GoogleServicesFramework	谷歌同步支持服务框架	可	GOOGLE 服务软件，删了不能同步联系人，不能登录google
+30	HTMLViewer	HTML浏览器	可	本地看html，不用可删
+31	kickback	触觉回馈	可	辅助功能，不用可删
+32	LatinIME	android键盘输入法	可	可自行安装其他输入法
+33	LatinImeTutorial	android键盘输入法设置	可	可同android键盘输入法一起删除
+34	Launcher2	原生桌面	不推荐	删除后必须加入第三方桌面程序
+35	LiveWallpapers	动态壁纸	可	可替代
+36	LiveWallpapersPicker	动态壁纸主程序	不推荐	删除后无法使用动态壁纸
+37	Maps	Google地图	可	GOOGLE 服务软件
+38	MarketUpdater	谷歌市场升级	可	删除后无法升级谷歌市场
+39	MediaProvider	多媒体播放	否	删除后无法正确播放影音媒体文件
+40	MediaUploader	媒体上传（可删）	可	删除后无法上传媒体
+41	Music	自带音乐播放器	可	可替代
+42	NetworkLocation	网络位置（可删）	可	辅助功能，不用可删
+43	OneTimeInitializer	初始服务	可	首次启动时用来装 Google Apps
+44	PackageInstaller	APK打包安装服务	否	删除后无法安装应用程序
+45	PassionQuickOffice	移动办公应用	可	不用可删，不影响第三方办公软件
+46	Phone	拨号插件	否	删除后无法正常使用3G
+47	PicoTts	语音合成引擎	可	删除后部分语音转换文字软件不可用，不影响第三方语音阅读软件
+48	PinyinIME	Google拼音输入法	不推荐	建议保留，比较实用
+49	Protips	安卓小部件	可	桌面新手指南，熟悉安卓可删
+50	Provision	设置引导画面	否	删除后无法正确引导开机
+51	QuickSearchBox	快速搜索栏	可	删除后桌面搜索栏消失
+52	RkApkinstaller_0710	RK程序安装器	不推荐	未发现更实用的安装程序
+53	RKEBookReader	RK电子书	可	可删除
+54	RockchipService	瑞芯微服务	否	未知，不建议删除
+55	Setting	系统设置	否	删除后无法进入设置
+56	SettingsProvider	设置服务程序	不建议	删除后部分设置可能报错
+57	soundback	声音反馈	可	辅助功能，不用可删
+58	SoundRecorder	录音机	可	可替代
+59	SystemUI	状态栏	否	删除后无法显示主界面菜单栏
+60	talkback	语音反馈	可	辅助功能，不用可删
+61	taskmanager	高级任务管理器	可	可替代
+62	TelephonyProvider	电话管理器	不建议	删除后暂无不良，需验证
+63	Term	超级终端	不建议	删除后暂无不良，需验证
+64	TtsService	语音文字转换	可	删除后不影响第三方语音阅读软件
+65	UiForUpdate	自动升级程序	否	删除无法实现本机升级
+66	UserDictionaryProvider	用户数据字典服务	可	删除后无法使用用户字典功能
+67	Vending	电子市场	可	删除后无法使用电子市场服务
+68	VideoPlayer	视频播放器	不推荐	未发现更实用的播放程序
+69	VoiceDialer	语音拨号器	可	辅助功能，不用可删
+70	VoiceSearch	语音搜索	可	辅助功能，不用可删
+71	VpnServices	VPN局域网服务	可	辅助功能，不用可删

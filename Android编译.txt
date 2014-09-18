@@ -1,0 +1,95 @@
+Android编译中m、mm、mmm的区别
+
+在AndroidSource Code中有envsetup.sh档案，当执行过此档案后，可以大幅将build的过程简单化、自动化。
+此档案在src(android source code 位置)/build/中，所以可以执行以下指令
+
+	$ source ./build/envsetup.sh
+
+可以使用help来检视有哪些指令可以使用
+
+	Invoke ". build/envsetup.sh" from your shell to add thefollowing functions to your environment:  
+  
+	- croot:   Changes directory to the top of the tree.  
+	- m:       Makesfrom the top of the tree.  
+	- mm:      Builds all of the modules in the currentdirectory.  
+	- mmm:     Builds all of the modules in the supplieddirectories.  
+	- cgrep:   Greps on all local C/C++ files.  
+	- hgrep:   Greps on all local C/C++ header files.  
+	- jgrep:   Greps on all local Java files.  
+	- mkgrep:  Greps on all local make files.  
+	- rcgrep:  Greps on all local .rc files.  
+	- resgrep: Greps on all local res/*.xml files.  
+	- shgrep:  Greps on all local .sh files.  
+	- godir:   Go to the directory containing a file.  
+
+
+其中对模块的编译有辅助说明的是tapas、m、mm、mmm这几个指令。
+其中mmm后面要跟模块的根目录，不是所有的目录下都有子模块，那些含有Android.mk档案目录才是模块的根目录，模块名可以从Android.mk的LOCAL_MODULE或者LOCAL_PACKAGE_NAME变数中得到。
+
+
+1、单独编译某模块，需要在mmm后面指定模块路径，例如编译external 中的jpeg
+
+	$ mmm external/jpeg/
+
+	============================================  
+	PLATFORM_VERSION_CODENAME=REL  
+	PLATFORM_VERSION=2.1-update1  
+	TARGET_PRODUCT=generic  
+	TARGET_BUILD_VARIANT=eng  
+	TARGET_SIMULATOR=  
+	TARGET_BUILD_TYPE=release  
+	TARGET_ARCH=arm  
+	HOST_ARCH=x86  
+	HOST_OS=linux  
+	HOST_BUILD_TYPE=release  
+	BUILD_ID=ECLAIR  
+	============================================  
+	make: Entering directory `/home/android/src'  
+	Target buildinfo: out/target/product/generic/root/default.prop  
+	Target buildinfo: out/target/product/generic/system/build.prop  
+	Copy: out/target/product/generic/system/etc/apns-conf.xml  
+	make: Leaving directory `/home/android/src'  
+
+
+2、或者可用 mm 再欲编译的模块目录下执行
+
+	root@ubuntu:/home/android/src/external/jpeg# mm  
+
+	============================================  
+	PLATFORM_VERSION_CODENAME=REL  
+	PLATFORM_VERSION=2.1-update1  
+	TARGET_PRODUCT=generic  
+	TARGET_BUILD_VARIANT=eng  
+	TARGET_SIMULATOR=false  
+	TARGET_BUILD_TYPE=release  
+	TARGET_ARCH=arm  
+	HOST_ARCH=x86  
+	HOST_OS=linux  
+	HOST_BUILD_TYPE=release  
+	BUILD_ID=ECLAIR  
+	============================================  
+	make: Entering directory `/home/android/src'  
+	Copy: out/target/product/generic/system/etc/apns-conf.xml  
+	make: Leaving directory `/home/android/src'  
+	root@ubuntu:/home/android/src/external/jpeg#  
+
+
+3、或者可用 m 编译全部的模块
+
+	root@ubuntu:/home/android/src# m  
+
+	你也可以在src目录下直接执行
+	root@ubuntu:/home/android/src# make module name：  
+
+	打开看 ./external/jpeg/Android.mk，看到里面模块名称为 libjpeg
+
+	LOCAL_MODULE := libjpeg
+
+	这样你就可以直接打模块名称编译
+
+
+总结：
+	m:		编译所有的模块
+	mm:		编译当前目录下的模块，当前目录下要有Android.mk文件
+	mmm:		编译指定路径下的模块，指定路径下要有Android.mk文件
+	make snod:	重新生成system.img
