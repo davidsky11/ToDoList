@@ -511,4 +511,269 @@ Linux µÄÇý¶¯³ÌÐò¿ÉÒÔËµÊÇÎå»¨°ËÃÅ£¬linux2.4 ºÍ linux2.6 µÄ±àÐ´ÓÐÏàµ±´óµÄÇø±ð£¬¾ÍÊ
 
 3	Ô¤´¦ÀíÆ÷±êÊ¶#errorµÄÄ¿µÄÊÇÊ²Ã´
 
+4	ËÀÑ­»·£¨Infinite loops£©
+
+	Ç¶ÈëÊ½ÏµÍ³ÖÐ¾­³£ÒªÓÃµ½ÎÞÏÞÑ­»·£¬ÄãÔõÃ´ÑùÓÃC±àÐ´ËÀÑ­»·ÄØ£¿Õâ¸öÎÊÌâÓÐ¼¸¸ö½â¾ö·½°¸¡£
+	ÎÒÊ×Ñ¡µÄ·½°¸ÊÇ£º
+	while (1) {
+	    ......
+	}
+	Ò»Ð©³ÌÐòÔ±¸üÏ²»¶ÈçÏÂ·½°¸£º
+	for (;;) {	// ´Ë´¦µÄÅÐ¶ÏÐ§ÂÊÒªµÍµÃ¶à£¬ÔÚ»ã±à´úÂëÖÐ¿ÉÒÔÌåÏÖ
+	    ......
+	}
+	Õâ¸öÊµÏÖ·½Ê½ÈÃÎÒÎªÄÑ£¬ÒòÎªÕâ¸öÓï·¨Ã»ÓÐÈ·ÇÐ±í´ïµ½µ×ÔõÃ´»ØÊÂ¡£Èç¹ûÒ»¸öÓ¦ÊÔÕß¸ø³öÕâ¸ö×÷Îª·½°¸£¬ÎÒ½«ÓÃÕâ¸ö×÷ÎªÒ»¸ö»ú»áÈ¥Ì½¾¿ËûÃÇÕâÑù×öµÄ»ù±¾Ô­Àí¡£Èç¹ûËûÃÇµÄ»ù±¾´ð°¸ÊÇ£º¡°ÎÒ±»½Ì×ÅÕâÑù×ö£¬µ«´ÓÃ»ÓÐÏë¹ýÎªÊ²Ã´¡£¡±Õâ»á¸øÎÒÁôÏÂÒ»¸ö»µÓ¡Ïó¡££¨ºÜ¶àÊ±ºòÃæÊÔ¹Ù¹Ø×¢ÄãË¼¿¼ÎÊÌâµÄ·½Ê½£¬ÊÇ·ñÁôÒâÄ³Ð©¶«Î÷ÉÆÓÚË¼¿¼£¬¿ÉÄÜ²¢Ã»ÓÐ¶Ô´í£¬Ö»ÊÇÆ«ºÃ¶øÒÑ£¬±ÈÈçmemsetºÍmemcopyÒÔ¼°strcpy¶¼ÄÜ¿½±´×Ö·û´®£¬µ½µ×ÓÐÊ²Ã´Çø±ðÄØ£¿¿´ÄãÊÇ·ñÉÆÓÚ±È½ÏÊÇ·ñ¹Ø×¢Ï¸½Ú£©
+
+	µÚÈý¸ö·½°¸ÊÇÓÃgoto£¨gotoÓï¾äÔÚCÖÐÊÇÓ¦¸Ã¾¡Á¿±ÜÃâµÄ£¬Ö»ÔÚ´¦Àí´íÎó´úÂëÊ±ÓÃ£©
+	Loop:
+	    ......
+	    ......
+	goto Loop;
+	Ó¦ÊÔÕßÈç¸ø³öÉÏÃæµÄ·½°¸£¬ÕâËµÃ÷»òÕßËûÊÇÒ»¸ö»ã±àÓïÑÔ³ÌÐòÔ±»òÕßËûÊÇÒ»¸öÏë½øÈëÐÂÁìÓòµÄBASIC/FORTRAN³ÌÐòÔ±¡£
+
+5	Êý¾ÝÉùÃ÷£¨Data declarations£©
+
+	ÓÃ±äÁ¿a¸ø³öÏÂÃæµÄ¶¨Òå
+	a) Ò»¸öÕûÐÍÊý£¨An integer£©
+	b) Ò»¸öÖ¸ÏòÕûÐÍÊýµÄÖ¸Õë£¨A pointer to an integer£©
+	c) Ò»¸öÖ¸ÏòÖ¸ÕëµÄÖ¸Õë£¬ËüÖ¸ÏòµÄÖ¸ÕëÊÇÖ¸ÏòÒ»¸öÕûÐÍÊý£¨A pointer to a pointer to an integer£©
+	d) Ò»¸öÓÐ10¸öÕûÐÍÊýµÄÊý×é£¨An array of 10 integers£©
+	e) Ò»¸öÓÐ10¸öÖ¸ÕëµÄÊý×é£¬¸ÃÖ¸ÕëÊÇÖ¸ÏòÒ»¸öÕûÐÍÊý£¨An array of 1 pointers to integers£©
+	f) Ò»¸öÖ¸ÏòÓÐ10¸öÕûÐÍÊýÊý×éµÄÖ¸Õë£¨A pointer to an array of 10 integers£©
+	g)  Ò»¸öÖ¸Ïòº¯ÊýµÄÖ¸Õë£¬¸Ãº¯ÊýÓÐÒ»¸öÕûÐÍ²ÎÊý²¢·µ»ØÒ»¸öÕûÐÍÊý£¨A pointer to a function that takes an integer as an argument and returns an integer£©
+	h) Ò»¸öÓÐ10¸öÖ¸ÕëµÄÊý×é£¬¸ÃÖ¸ÕëÖ¸ÏòÒ»¸öº¯Êý£¬¸Ãº¯ÊýÓÐÒ»¸öÕûÐÍ²ÎÊý²¢·µ»ØÒ»¸öÕûÐÍÊý£¨An array of 10 pointers to functions that take aninteger argument and return an integer£©
+	´ð°¸ÊÇ£º
+	a) int a;
+	b) int *a;
+	c) int **a;
+	d) int a[10];
+	e) int *a[10];
+	f) int (*a)[10];
+	g) int (*a)(int);
+	h) int (*a[10])(int);
+
+6	¹Ø¼ü×ÖstaticµÄ×öÓÃÊÇÊ²Ã´
+
+	Õâ¸ö¼òµ¥µÄÎÊÌâºÜÉÙÓÐÈËÄÜ»Ø´ðÍêÈ«¡£ÔÚCÓïÑÔÖÐ£¬¹Ø¼ü×ÖstaticÓÐÈý¸öÃ÷ÏÔµÄ×÷ÓÃ£º
+	1) ÔÚº¯ÊýÌåÄÚ£¬Ò»¸ö±»ÉùÃ÷Îª¾²Ì¬µÄ±äÁ¿ÔÚÕâÒ»º¯Êý±»µ÷ÓÃ¹ý³ÌÖÐÎ¬³ÖÆäÖµ²»±ä£¨¸Ã±äÁ¿´æ·ÅÔÚ¾²Ì¬±äÁ¿Çø£©¡£
+	2) ÔÚÄ£¿éÄÚ£¨µ«ÔÚº¯ÊýÌåÍâ£©£¬Ò»¸ö±»ÉùÃ÷Îª¾²Ì¬µÄ±äÁ¿¿ÉÒÔ±»Ä£¿éÄÚËùÓÃº¯Êý·ÃÎÊ£¬µ«²»ÄÜ±»Ä£¿éÍâÆäËûº¯Êý·ÃÎÊ¡£ËüÊÇÒ»¸ö±¾µØµÄÈ«¾Ö±äÁ¿¡£
+	3) ÔÚÄ£¿éÄÚ£¬Ò»¸ö±»ÉùÃ÷Îª¾²Ì¬µÄº¯ÊýÖ»¿ÉÒÔ±»ÕâÒ»Ä£¿éÄÚµÄÆäËûº¯Êýµ÷ÓÃ¡£ÄÇ¾ÍÊÇ£¬Õâ¸öº¯Êý±»ÏÞÖÆÔÚÉùÃ÷ËüµÄÄ£¿éµÄ±¾µØ·¶Î§ÄÚÊ¹ÓÃ¡£
+
+	´ó¶àÊýÓ¦ÊÔÕßÄÜÕýÈ·»Ø´ðµÚÒ»²¿·Ö£¬Ò»²¿·ÖÄÜÕýÈ·»Ø´ðµÚ¶þ²¿·Ö£¬µ«ÊÇºÜÉÙµÄÈËÄÜ¶®µÃµÚÈý²¿·Ö¡£ÕâÊÇÒ»¸öÓ¦ÊÔÕßµÄÑÏÖØµÄÈ±µã£¬ÒòÎªËûÏÔÈ»²»¶®µÃ±¾µØ»¯Êý¾ÝºÍ´úÂë·¶Î§µÄºÃ´¦ºÍÖØÒªÐÔ¡£
+
+	¿¼µã£º
+	ÔÚÇ¶ÈëÊ½ÏµÍ³ÖÐ£¬ÒªÊ±¿Ì¶®µÃÒÆÖ²µÄÖØÒªÐÔ£¬³ÌÐò¿ÉÄÜÊÇºÜ¶à³ÌÐòÔ±¹²Í¬Ð­×÷Í¬Ê±Íê³É£¬ÔÚ¶¨Òå±äÁ¿¼°º¯ÊýµÄ¹ý³Ì£¬¿ÉÄÜ»áÖØÃû£¬Õâ¸øÏµÍ³µÄ¼¯³É´øÀ´Âé·³£¬Òò´Ë±£Ö¤²»³åÍ»µÄ·½·¨ÊÇÏÔÊ½µÄ±íÊ¾´Ë±äÁ¿»òÕßº¯ÊýÊÇ±¾µØµÄ£¬static¼´¿É¡£
+	ÔÚLinuxµÄÄ£¿é±à³ÌÖÐ£¬ÕâÒ»ÌõºÜÃ÷ÏÔ£¬ËùÓÐµÄº¯ÊýºÍÈ«¾Ö±äÁ¿¶¼ÒªÓÃstatic¹Ø¼ü×ÖÉùÃ÷£¬½«Æä×÷ÓÃÓòÏÞÖÆÔÚ±¾Ä£¿éÄÚ²¿£¬ÓëÆäËûÄ£¿é¹²ÏíµÄº¯Êý»òÕß±äÁ¿ÒªEXPORT µ½ÄÚºËÖÐ¡£
+
+	static¹Ø¼ü×ÖÖÁÉÙÓÐÏÂÁÐN¸ö×÷ÓÃ£º
+	1) ÉèÖÃ±äÁ¿µÄ´æ´¢Óò£¬º¯ÊýÌåÄÚstatic±äÁ¿µÄ×÷ÓÃ·¶Î§Îª¸Ãº¯ÊýÌå£¬²»ÓÃÓÚauto±äÁ¿£¬¸Ã±äÁ¿µÄÄÚ´æÖ»±»·ÖÅäÒ»´Î£¬Òò´ËÆäÖµÔÚÏÂ´Îµ÷ÓÃÊ±ÈÔÎ¬³ÖÉÏ´ÎµÄÖµ£»
+	2) ÏÞÖÆ±äÁ¿µÄ×÷ÓÃÓò£¬ÔÚÄ£¿éÄÚµÄstaticÈ«¾Ö±äÁ¿¿ÉÒÔ±»Ä£¿éÄÚËùÓÃº¯Êý·ÃÎÊ£¬µ«²»ÄÜ±»Ä£¿éÍâÆäËûº¯Êý·ÃÎÊ£»
+	3) ÏÞÖÆº¯ÊýµÄ×÷ÓÃÓò£¬ÔÚÄ£¿éÄÚµÄstaticº¯ÊýÖµ¿É±»ÕâÒ»Ä£¿éÄÚµÄÆäËûº¯Êýµ÷ÓÃ£¬Õâ¸öº¯ÊýµÄÊ¹ÓÃ·¶Î§±»ÏÞÖÆÔÚÉùÃ÷ËüµÄÄ£¿éÄÚ£»
+	4) ÔÚÀàÖÐµÄstatic³ÉÔ±±äÁ¿ÒâÎ¶×ÅËüÎª¸ÃÀàµÄËùÓÐÊµÀýËù¹²Ïí£¬Ò²¾ÍÊÇËµµ±Ä³¸öÀàµÄÊµÀýÐÞ¸ÄÁË¸Ã¾²Ì¬³ÉÔ±±äÁ¿£¬ÆäÐÞ¸ÄÖ®Îª¸ÃÀàµÄÆäËûËùÓÐÊµÀýËù¼û£»
+	5) ÔÚÀàÖÐµÄstatic³ÉÔ±º¯ÊýÊôÓÚÕû¸öÀàËùÓµÓÐ£¬Õâ¸öº¯Êý²»½ÓÊÕthisÖ¸Õë£¬Òò¶øÖ»ÄÜ·ÃÎÊÀàµÄstatic³ÉÔ±±äÁ¿¡£
 	
+
+7	¹Ø¼ü×ÖconstÓÐÊ²Ã´º¬Òå
+
+	ÎÒÖ»ÒªÒ»Ìýµ½±»ÃæÊÔÕßËµ£¬¡°constÒâÎ¶×Å³£Êì¡±£¬ÎÒ¾ÍÖªµÀÎÒÕýÔÚºÍÒ»¸öÒµÓàÕß´ò½»µÀ¡£Ò»°ãÖ»ÒªÄÜËµ³öconstÒâÎ¶×Å¡°Ö»¶Á¡±¾Í¿ÉÒÔÁË¡£Èç¹ûÓ¦ÊÔÕßÄÜÕýÈ·»Ø´ðÕâ¸öÎÊÌâ£¬ÎÒ½«ÎÊËûÒ»¸ö¸½¼ÓµÄÎÊÌâ£ºÏÂÃæµÄÉùÃ÷¶¼ÊÇÊ²Ã´ÒâË¼£¿
+	constÖ»ÊÇÒ»¸öÐÞÊÎ·û£¬²»¹ÜÔõÑùaÈÔÈ»ÊÇÒ»¸öintÐÍµÄ±äÁ¿
+	const int a;
+	int const a;
+	const int *a;
+	int * const a;
+	int const * a const;
+	±¾ÖÊ£ºconstÔÚË­ºóÃæË­¾Í²»¿ÉÐÞ¸Ä£¬constÔÚ×îÇ°ÃæÔò½«ÆäºóÒÆÒ»Î»¼´¿É£¬¶þÕßµÈÐ§¡£
+
+	Ç°Á½¸öµÄ×÷ÓÃÊÇÒ»ÑùµÄ£¬aÊÇÒ»¸ö³£ÕûÐÍÊý¡£µÚÈý¸öÒâÎ¶×ÅaÊÇÒ»¸öÖ¸Ïò³£ÕûÐÍÊýµÄÖ¸Õë£¨Ò²¾ÍÊÇËµ£¬Ö¸ÏòµÄÕûÐÍÊýÊÇ²»¿ÉÐÞ¸ÄµÄ£¬µ«Ö¸Õë¿ÉÒÔ£¬´Ë×î³£¼ûÓÚº¯ÊýµÄ¶î²ÎÊý£¬µ±ÄãÖ»ÒýÓÃ´«½øÀ´Ö¸ÕëËùÖ¸ÏòµÄÖµÊ±Ó¦¸Ã¼ÓÉÏconstÐÞÊÎ·û£¬³ÌÐòÖÐÐÞ¸Ä±àÒë¾Í²»Í¨¹ý£¬¿ÉÒÔ¼õÉÙ³ÌÐòµÄbug£©¡£
+
+	µÚËÄ¸öÒâË¼aÊÇÒ»¸öÖ¸ÏòÕûÐÍÊýµÄ³£Ö¸Õë£¨Ò²¾ÍÊÇËµ£¬Ö¸ÕëÖ¸ÏòµÄÕûÐÍÊýÊÇ¿ÉÒÔÐÞ¸ÄµÄ£¬µ«Ö¸ÕëÊÇ²»¿ÉÐÞ¸ÄµÄ£©¡£×îºóÒ»¸öÒâÎ¶×ÅaÊÇÒ»¸öÖ¸Ïò³£ÕûÐÍÊýµÄ³£Ö¸Õë£¨Ò²¾ÍÊÇËµ£¬Ö¸ÕëÖ¸ÏòµÄÕûÐÍÊýÊÇ²»¿ÉÐÞ¸ÄµÄ£¬Í¬Ê±Ö¸ÕëÒ²ÊÇ²»¿ÉÐÞ¸ÄµÄ£©¡£
+
+	Èç¹ûÓ¦ÊÔÕßÄÜÕýÈ·»Ø´ðÕâÐ©ÎÊÌâ£¬ÄÇÃ´Ëû¾Í¸øÎÒÁôÏÂÁËÒ»¸öºÃÓ¡Ïó¡£Ë³´øÌáÒ»¾ä£¬Ò²ÐíÄã¿ÉÄÜ»áÎÊ£¬¼°Ê±²»ÓÃ¹Ø¼ü×Ö£¬Ò²»¹ÊÇÄÜºÜÈÝÒ×Ð´³ö¹¦ÄÜÕýÈ·µÄ³ÌÐò£¬ÄÇÃ´ÎÒÎªÊ²Ã´»¹ÒªÈç´Ë¿´ÖØ¹Ø¼ü×ÖconstÄØ£¿ÎÒÓÐÈçÏÂµÄ¼¸¸öÀíÓÉ£º
+	1) ¹Ø¼ü×ÖconstµÄ×÷ÓÃÊÇÎª¸ø¶ÁÄã´úÂëµÄÈË´«´ï·Ç³£ÓÐÓÃµÄÐÅÏ¢£¬Êµ¼ÊÉÏ£¬ÉùÃ÷Ò»¸ö²ÎÊýÎª³£Á¿ÊÇÎªÁË¸æËßÁËÓÃ»§Õâ¸ö²ÎÊýµÄÓ¦ÓÃÄ¿µÄ¡£Èç¹ûÄãÔø»¨ºÜ¶àÊ±¼äÇåÀíÆäËûÈËÁôÏÂµÄÀ¬»ø£¬Äã¾Í»áºÜ¿ìÑ§»á¸ÐÐ»Õâµã¶àÓàµÄÐÅÏ¢¡£
+	2) Í¨¹ý¸øÓÅ»¯Æ÷Ò»Ð©¸½¼ÓµÄÐÅÏ¢£¬Ê¹ÓÃ¹Ø¼ü×ÖconstÒ²ÐíÄÜ²úÉú¸ü½ô´ÕµÄ´úÂë¡£
+	3) ºÏÀíµØÊ¹ÓÃ¹Ø¼ü×Öconst¿ÉÒÔÊ¹±àÒëÆ÷ºÜ×ÔÈ»µØ±£»¤ÄÇÐ©²»Ï£Íû±»¸Ä±äµÄ²ÎÊý£¬·ÀÖ¹Æä±»ÎÞÒâµÄ´úÂëÐÞ¸Ä¡£¼ò¶øÑÔÖ®£¬ÕâÑù¿ÉÒÔ¼õÉÙbugµÄ³öÏÖ¡£
+
+	const¹Ø¼ü×ÖÖÁÉÙÓÐÏÂÁÐN¸ö×÷ÓÃ£º
+	1) Óû×èÖ¹Ò»¸ö±äÁ¿±»¸Ä±ä£¬¿ÉÒÔÊ¹ÓÃconst¹Ø¼ü×Ö¡£ÔÚ¶¨Òå¸Ãconst±äÁ¿Ê±£¬Í¨³£ÐèÒª¶ÔËü½øÐÐ³õÊ¼»¯£¬Òò´ËÒÔºó¾ÍÃ»ÓÐ»ú»áÔÙÈ¥¸Ä±äËüÁË£»
+	2) ¶ÔÖ¸ÕëÀ´Ëµ£¬¿ÉÒÔÖ¸¶¨Ö¸Õë±¾ÉíÎªconst£¬Ò²¿ÉÒÔÖ¸¶¨Ö¸ÕëËùÖ¸µÄÊý¾ÝÎªconst£¬»ò¶þÕßÍ¬Ê±Ö¸¶¨Îªconst£»
+	3) ÔÚÒ»¸öº¯ÊýÉùÃ÷ÖÐ£¬const¿ÉÒÔÐÞÊÎÐÎ²Î£¬ÉùÃ÷ËüÊÇÒ»¸öÊäÈë²ÎÊý£¬ÔÚº¯ÊýÄÚ²¿²»ÄÜ¸Ä±äÆäÖµ£»
+	4) ¶ÔÓÚÀàµÄ³ÉÔ±º¯Êý£¬ÈôÖ¸¶¨ÆäÎªconstÀàÐÍ£¬Ôò±íÃ÷ÆäÊÇÒ»¸ö³£º¯Êý£¬²»ÄÜÐÞ¸ÄÀàµÄ³ÉÔ±±äÁ¿£»
+	5) ¶ÔÓÚÀàµÄ³ÉÔ±º¯Êý£¬ÓÐÊ±ºò±ØÐëÖ¸¶¨Æä·µ»ØÖµÎªconstÀàÐÍ£¬ÒÔÊ¹µÃÆä·µ»ØÖµ²»Îª¡°×óÖµ¡±¡£ÀýÈç£º
+	const classA operator*(const classA& a1, const classA& a2);
+		operator*µÄ·µ»Ø½á¹û±ØÐëÊÇÒ»¸öconst¶ÔÏó¡£Èç¹û²»ÊÇ£¬ÕâÑùµÄ±äÌ¬´úÂëÒ²²»»á±àÒë³ö´í¡£
+	classA a, b, c;
+	(a * b) = c;	// ¶Ôa*bµÄ½á¹û¸³Öµ
+		²Ù×÷(a * b) = c ÏÔÈ»²»·ûºÏ±à³ÌÕßµÄ³õÖÔ£¬Ò²Ã»ÓÐÈÎºÎÒâÒå¡£
+
+
+8	VolatileµÄÊ¹ÓÃ
+
+	¹Ø¼ü×ÖvolatileÓÐÊ²Ã´º¬Òå£¿
+	Ò»¸ö¶¨ÒåÎªvolatileµÄ±äÁ¿ÊÇËµÕâ±äÁ¿¿ÉÄÜ»á±»ÒâÏë²»µ½µØ¸Ä±ä£¬ÕâÑù£¬±àÒëÆ÷¾Í²»»áÈ¥¼ÙÉèÕâ¸ö±äÁ¿µÄÖµÁË¡£¾«È·µØËµ£¬ÓÅ»¯Æ÷ÔÚÓÃµ½Õâ¸ö±äÁ¿Ê±±ØÐëÃ¿´Î¶¼Ð¡ÐÄµØÖØÐÂ¶ÁÈ¡Õâ¸ö±äÁ¿µÄÖµ£¬¶ø²»ÊÇÊ¹ÓÃ±£´æÔÚ¼Ä´æÆ÷ÀïµÄ±¸·Ý£¨ÓÉÓÚ·ÃÎÊ¼Ä´æÆ÷µÄËÙ¶ÈÒª¿ì¹ýRAM£¬ËùÒÔ±àÒëÆ÷Ò»°ã¶¼»á×÷¼õÉÙ´æÈ¡Íâ²¿RAMµÄÓÅ»¯£©¡£ÏÂÃæÊÇvolatile±äÁ¿µÄ¼¸¸öÀý×Ó£º
+	1) ²¢ÐÐÉè±¸µÄÓ²¼þ¼Ä´æÆ÷£¨Èç£º×´Ì¬¼Ä´æÆ÷£¬Í¨³£ÔÚÍ·ÎÄ¼þÖÐ½«Ó²¼þ¼Ä´æÆ÷µØÖ·defineÎªÄ³¸öÒâÒåÃ÷È·µÄ±í´ïÊ½£©
+	2) Ò»¸öÖÐ¶Ï·þÎñ×Ó³ÌÐòÖÐ»á·ÃÎÊµ½µÄ·Ç×Ô¶¯±äÁ¿£¨Non-automatic variables£¬¼´static±äÁ¿£©£»ÔÚÖÐ¶Ï·þÎñ³ÌÐòÖÐÐÞ¸ÄµÄ¹©ÆäËû³ÌÐò¼ì²âÓÃµÄ±äÁ¿ÐèÒª¼ÓvolatileÉùÃ÷£»·ñÔò±àÒëÆ÷¿ÉÄÜ¶Ô±äÁ¿¸üÐÂÒ»´ÎºóÃ¿´Î¶¼Ê¹ÓÃ»º´æÖµ²»ÔÙÁ¢¼´¸üÐÂ
+	3) ¶àÏß³ÌÓ¦ÓÃÖÐ±»¼¸¸öÈÎÎñ¹²ÏíµÄ±äÁ¿£¨¿ÉÄÜ±»¶à¸öÏß³ÌËæÊ±ÐÞ¸Ä£©
+
+	»Ø´ð²»³öÕâ¸öÎÊÌâµÄÈËÊÇ²»»á±»¹ÍÓ¶µÄ¡£ÎÒÈÏÎªÕâÊÇÇø·ÖC³ÌÐòÔ±ºÍÇ¶ÈëÊ½³ÌÐòÔ±µÄ×î»ù±¾µÄÎÊÌâ¡£¸ãÇ¶ÈëÊ½µÄ¼Ò»ïÃÇ¾­³£Í¬Ó²¼þ¡¢ÖÐ¶Ï¡¢RTOSµÈµÈ´ò½»µÀ£¬ËùÓÐÕâÐ©¶¼ÒªÇóÓÃµ½volatile±äÁ¿¡£²»¶®µÃvolatileµÄÄÚÈÝ½«»á´øÀ´ÔÖÄÑ¡£¼ÙÉè±»ÃæÊÔÕßÕýÈ·µØ»Ø´ðÁËÕâÐ©ÎÊÌâ£¬ÎÒ½«ÉÔÎ¢Éî¾¿Ò»ÏÂ£¬¿´Ò»ÏÂÕâ¼Ò»ïÊÇ²»ÊÇÕæÕý¶®µÃvkolatileÍêÈ«µÄÖØÒªÐÔ¡£
+	1) Ò»¸ö²ÎÊý¼È¿ÉÒÔÊÇconst»¹¿ÉÒÔÊÇvalatileÂð£¿
+	2) Ò»¸öÖ¸Õë¿ÉÒÔÊÇvolatileÂð£¿
+	3) ÏÂÃæµÄº¯ÊýÓÐÊ²Ã´´íÎó£º
+		int square(volatile int *ptr) {
+			return *ptr * *ptr;
+		}
+	´ð°¸£º
+	1) ÊÇµÄ¡£Ò»¸öÀý×ÓÊÇÖ»¶ÁµÄ×´Ì¬¼Ä´æÆ÷¡£ËüÊÇvolatileÒòÎªËü¿ÉÄÜ±»ÒâÏë²»µ½µØ¸Ä±ä¡£ËüÊÇconstÒòÎª³ÌÐò²»Ó¦¸ÃÊÔÍ¼È¥ÐÞ¸ÄËü¡£
+	2) ÊÇµÄ¡£¾¡¹ÜÕâ²¢²»³£¼û¡£Ò»¸öÀý×ÓÊÇµ±Ò»¸öÖÐ¶Ï·þÎñ×Ó³ÌÐòÐÞ¸ÄÒ»¸öÖ¸ÏòÒ»¸öbufferµÄÖ¸ÕëÊ±¡£
+	3) Õâ¶Î´úÂëÓÐµã±äÌ¬¡£ËüµÄÄ¿µÄÊÇ·µ»ØÖ¸Õë*ptrÖ¸ÏòÖµµÄÆ½·½£¬µ«ÊÇ£¬ÓÉÓÚ*ptrÖ¸ÏòÒ»¸övolatileÐÍ²ÎÊý£¬±àÒëÆ÷½«²úÉúÀàËÆÏÂÃæµÄ´úÂë£º
+		int square(volatile int *ptr) {
+			int a, b;
+			a = *ptr;
+			b = *ptr;
+			return a * b;
+		}
+	ÓÉÓÚ*ptrµÄÖµ¿ÉÄÜ±»ÒâÏë²»µ½µØ¸Ä±ä£¬Òò´ËaºÍb¿ÉÄÜÊÇ²»Í¬µÄ¡£½á¹û£¬Õâ¶Î´úÂë¿ÉÄÜ·µ»Ø²»ÊÇÄãËùÆÚÍûµÄÆ½·½Öµ¡£ÕýÈ·µÄ´úÂëÈçÏÂ£º
+		int square(volatile int *ptr) {
+			int a;
+			a = *ptr;
+			return a * a;
+		}
+	
+	¶¨ÒåÒ»¸öÒ×Ê§ÐÔ±äÁ¿£¬±àÒëÆ÷ÓÐÒ»ÖÖ¼¼Êõ½ÐÊý¾ÝÁ÷·ÖÎö£¬·ÖÎö³ÌÐòÖÐµÄ±äÁ¿ÔÚÄÄÀï±»¸³Öµ¡¢ÔÚÄÄÀïÊ¹ÓÃ¡¢ÔÚÄÄÀïÊ¦±í£¬·ÖÎö½á¹û¿ÉÓÃÓÃÓÚ³£Á¿ºÏ²¢£¬³£Á¿´«²¥µÈÓÅ»¯¡£µ±±àÒëÆ÷¼ì²éµ½´úÂëÃ»ÓÐÐÞ¸Ä×Ö¶ÎµÄÖµ£¬¾ÍÓÐ¿ÉÄÜÔÚÄã·ÃÎÊ×Ö¶ÎÊ±Ìá¹©ÉÏ´Î·ÃÎÊµÄ»º´æÖµ£¬ÕâÄÜ¹»Ìá¸ß³ÌÐòµÄÐ§ÂÊ£¬µ«ÓÐÊ±ÕâÐ©ÓÅ»¯»á´øÀ´ÎÊÌâ£¬²»ÊÇÎÒÃÇ³ÌÐòËùÐèÒªµÄ£¬ÌØµãÊÇ¶ÔÓ²¼þ¼Ä´æÆ÷²Ù×÷µÄ³ÌÐò£¬ÕâÊ±¿ÉÒÔÓÃvolatile¹Ø¼ü×Ö½ûÖ¹×öÕâÐ©ÓÅ»¯¡£
+
+	¶àÈÎÎñ»·¾³ÏÂ¸öÈÎÎñ¼ä¹²ÏíµÄ±êÖ¾Ó¦¸Ã¼Óvolatile¹Ø¼ü×Ö£ºÔÚ¶àÏß³Ì·ÃÎÊÄ³×Ö¶ÎÊ±£¬´úÂëÏ£ÍûÕâÐ©·ÃÎÊÄÜ¹»²Ù×÷£¨¶ÁÈ¡£©µ½×Ö¶ÎµÄ×îÐÂÖµ£¬Í¬Ê±Ð´µ½±äÁ¿µÄ²Ù×÷ÄÜÁ¢¼´¸üÐÂ£»¶Ô×Ö¶Î¼ÓÉÏvolatile¹Ø¼ü×Ö£¬ÄÇÃ´¶Ô¸Ã×Ö¶ÎµÄÈÎºÎÇëÇó£¨¶Á/Ð´£©¶¼»áÁ¢¿ÌµÃµ½Ö´ÐÐ¡£
+
+
+9	Î»²Ù×÷£¨Bit manipulation£©
+
+	Ç¶ÈëÊ½ÏµÍ³×ÜÊÇÒªÓÃ»§¶Ô±äÁ¿»ò¼Ä´æÆ÷½øÐÐÎ»²Ù×÷¡£¸ø¶¨Ò»¸öÕûÐÍ±äÁ¿a£¬Ð´Á½¶Î´úÂë£¬µÚÒ»¸öÉèÖÃaµÄbit 3£¬ µÚ¶þ¸öÇå³ýaµÄbit 3.ÔÚÒÔÉÏÁ½¸ö²Ù×÷ÖÐ£¬Òª±£³ÖÆäËûÎ»²»±ä¡£¶ÔÕâ¸öÎÊÌâÓÐÈýÖÖ»ù±¾µÄ·´Ó¦
+	1) ²»ÖªµÀÈçºÎÏÂÊÖ¡£¸ÃÃæÊÔÕß´ÓÃ»×ö¹ýÈÎºÎÇ¶ÈëÊ½ÏµÍ³µÄ¹¤×÷¡£
+	2) ÓÃbit fields¡£Bit fieldsÊÇ±»ÈÓµ½CÓïÑÔËÀ½ÇµÄ¶«Î÷£¬Ëü±£Ö¤ÄãµÄ´úÂëÔÚ²»Í¬±àÒëÆ÷Ö®¼äÊÇ²»¿ÉÒÆÖ²µÄ£¬Í¬Ê±Ò²±£Ö¤ÁËµÄÄãµÄ´úÂëÊÇ²»¿ÉÖØÓÃµÄ¡£
+	3) ÓÃ #defines ºÍ bit masks ²Ù×÷¡£ÕâÊÇÒ»¸öÓÐ¼«¸ß¿ÉÒÆÖ²ÐÔµÄ·½·¨£¬ÊÇÓ¦¸Ã±»ÓÃµ½µÄ·½·¨¡£×î¼ÑµÄ½â¾ö·½°¸ÈçÏÂ£º
+		#define BIT3 (0x1 << 3) £¨²ÉÓÃºê½«Êý×Ö¶¨ÒåÎªÓÐÒâÒåµÄBIT3£¬Ã÷È·£¬²»Ò×³ö´í£¬¸ÄÆðÀ´·½±ã£©
+		static int a;
+		void set_bit3(void) {
+			a |= BIT3;
+		}
+		void clear_bit3(void) {
+			a &= ~BIT3;
+		}
+
+	Ò»Ð©ÈËÏ²»¶ÎªÉèÖÃºÍÇå³ýÖµ¶ø¶¨ÒåÒ»¸öÑÚÂë£¨´ý²Ù×÷Î»È«1£¬ÆäÓàÎ»È«0µÄÊý£¬¶ÔÓÚÄ³¸öÒâË¼¿¿¶àÎ»Í¬Ê±±íÊ¾µÄ×îºÃ´øÉÏÑÚÂë£¬¸ôÀëÆäËûÎ»µÄÓ°Ïì£©Í¬Ê±¶¨ÒåÒ»Ð©ËµÃ÷³£Êì£¬ÕâÒ²ÊÇ¿ÉÒÔ½ÓÊÜµÄ¡£ÎÒÏ£Íû¿´µ½¼¸¸öÒªµã£ºËµÃ÷³£Êý¡¢|=ºÍ&=~²Ù×÷£¬ÏÈÈ¡·´ÔÙ&ÊÇ¶ÔÄ³Î»Çå0µÄ×îºÃ²Ù×÷¡£
+
+	¿¼µã£º
+	ÔÚÇ¶ÈëÊ½ÏµÍ³ÖÐ£¬Ê±¿ÌÒª¹Ø×¢ÒÆÖ²ÐÔ£¬¾ßÌåµÄ³ÌÐòÖÐ²»Òª³öÏÖ¾ßÌåµÄÊý×Ö£¬ÕâÐ©Êý×Ö¶¼Ó¦¸Ãdefine³ÉÄ³¸öÓÐÒâÒåµÄ·ûºÅ£¬¿É¶ÁÐÔ¿ÉÒÆÖ²ÐÔ¶¼ºÜÇ¿£¬±ÈÈç
+		#define BIT(x) (0x1 << (x))
+	X×÷Îª²ÎÊý¿ÉÒÔºÜ·½±ãµÄ¶ÔÈÎÒâÎ»½øÐÐ²Ù×÷£¬ÒâÒåÃ÷È·£¬¸ü¸ÄÌæ»»·½±ã
+ 
+10	·ÃÎÊ¹Ì¶¨µÄÄÚ´æÎ»ÖÃ£¨Accessing fixed memory locations£©
+
+	Ç¶ÈëÊ½ÏµÍ³¾­³£¾ßÓÐÒªÇó³ÌÐòÔ±È¥·ÃÎÊÄ³ÌØ¶¨µÄÄÚ´æÎ»ÖÃµÄÌØ¶¨¡£ÔÚÄ³¹¤³ÌÖÐ£¬ÒªÇóÉèÖÃÒ»¾ø¶ÔµØÖ·Îª0x67a9µÄÕûÐÍ±äÁ¿µÄÖµÎª0xaa66¡£±àÒëÆ÷ÊÇÒ»¸ö´¿´âµÄANSI±àÒëÆ÷¡£Ð´´úÂëÈ¥Íê³ÉÕâÒ»ÈÎÎñ¡£ÕâÒ»ÎÊÌâ²âÊÔÄãÊÇ·ñÖªµÀÎªÁË·ÃÎÊÒ»¾ø¶ÔµØÖ·°ÑÒ»¸öÕûÐÍÊýÇ¿ÖÆ×ª»»£¨typecast£©ÎªÒ»Ö¸ÕëÊÇºÏ·¨µÄ¡£ÕâÒ»ÎÊÌâµÄÊµÏÖ·½Ê½Ëæ×Å¸öÈË·ç¸ñ²»Í¬¶ø²»Í¬¡£µäÐÍµÄÀàËÆ´úÂëÈçÏÂ£º
+		int *ptr;
+		ptr = (int *)0x67a9;
+		*ptr = 0xaa55;
+		A more obscure approach is: ( Ò»¸ö½Ï»ÞÉ¬µÄ·½·¨ÊÇ)£º
+		*(int * const)(0x67a9) = 0xaa55;
+	¼´Ê¹ÄãµÄÆ·Î¶¸ü½Ó½üµÚ¶þÖÖ·½°¸£¬µ«ÎÒ½¨ÒéÄãÔÚÃæÊÔÊ±Ê¹ÓÃµÚÒ»ÖÖ·½°¸¡£
+ 
+	ÔÚÇ¶ÈëÊ½ÏµÍ³ÖÐ£¬¶ÔÓÚ´óÁ¿´ËÀàÐÍÊý¾ÝÈçÓ²¼þ¼Ä´æÆ÷Ó¦¸Ã²ÉÓÃÈçÏÂ·½Ê½
+	typedef volatile unsigned int HARD_REG;
+	#define REG_NAME  (*(HARD_REG *)ADDR)
+	¼´½«ADDRÇ¿ÖÆ×ª»»ÎªÒ»¸öÖ¸ÏòHARD_REGÀàÐÍÊý¾ÝµÄÖ¸Õë£¬*HARD_REGÎªvolatileµÄÎÞ·ûºÅÕûÐÍÊý
+
+
+11	ÖÐ¶Ï£¨Interrupts£©
+
+	ÖÐ¶ÏÊÇÇ¶ÈëÊ½ÏµÍ³ÖÐÖØÒªµÄ×é³É²¿·Ö£¬Õâµ¼ÖÂÁËºÜ¶à±àÒë¿ª·¢ÉÌÌá¹©Ò»ÖÖÀ©Õ¹-ÈÃ±ê×¼CÖ§³ÖÖÐ¶Ï¡£Æä´ú±íÊÂÊµÊÇ£¬²úÉúÒ»¸öÐÂµÄ¹Ø¼ü×Ö__interrupt£¨51¼´Èç´Ë£©¡£ÏÂÃæµÄ´úÂë¾ÍÊ¹ÓÃÁË__interrupt¹Ø¼ü×ÖÈ¥¶¨ÒåÁËÒ»¸öÖÐ¶Ï·þÎñ×Ó³ÌÐò(ISR)£¬ÇëÆÀÂÛÒ»ÏÂÕâ¶Î´úÂëµÄ¡£
+		__interrupt double compute_area (double radius) {
+			double area = PI * radius * radius;
+			printf("/nArea = %f", area);
+			return area;
+		}
+	Õâ¸öº¯ÊýÓÐÌ«¶àµÄ´íÎó£¬ÒÔÖÁÓÚÈÃÈË²»Öª´ÓºÎËµÆð£¨Ç°ÌáÊÇ·Ç²Ù×÷ÏµÍ³ÏÂµÄÖÐ¶Ï·þÎñº¯Êý£©£º
+	1) ISR²»ÄÜ·µ»ØÒ»¸öÖµ£¨¶¼Ó¦¸ÃÎªvoidÀàÐÍ£©
+	2) ISR²»ÄÜ´«µÝ²ÎÊý¡£
+	3) ÔÚÐí¶àµÄ´¦ÀíÆ÷/±àÒëÆ÷ÖÐ£¬¸¡µãÒ»°ã¶¼ÊÇ²»¿ÉÖØÈëµÄ¡£ÓÐÐ©´¦ÀíÆ÷/±àÒëÆ÷ÐèÒªÈÃ¶îÍâµÄ¼Ä´æÆ÷ÈëÕ»£¬ÓÐÐ©´¦ÀíÆ÷/±àÒëÆ÷¾ÍÊÇ²»ÔÊÐíISRÖÐ×ö¸¡µãÔËËã¡£´ËÍâ£¬ISRÓ¦¸ÃÊÇ¶Ì¶øÓÐÐ§ÂÊµÄ£¬ÔÚISRÖÐ×ö¸¡µãÔËËãÊÇ²»Ã÷ÖÇµÄ¡£
+	///////////////////
+	ÁíÍâ£¬ÖÐ¶Ï·þÎñ³ÌÐòÊÇÔËÐÐÔÚÄÚºËÌ¬µÄ£¨Linux£©£¬ÄÚºËÍ¨³£ÊÇ²»Ö§³Ö¸¡µãÔËËãµÄ¡£
+	ÄÚºËÖÐµÄprintkºÍ±ê×¼¿âµÄprintf²»Ò»Ñù£¬Ç°ÕßÒòÎªÓÉÄÚºËÖ±½ÓÊµÏÖ£¬²»ÄÜÖ§³Ö¸¡µã¡£
+	Èç¹ûÄãµÄÄÚºËÀï±àÒë½øÁË¸¡µãÖ§³Ö£¬ÄÇÃ´ÊÇ¿ÉÒÔµÄ¡£Òª²»ÄÚºË»òÊÇÄ£¿é²»ÄÜÓÃfloat»òÊÇdoubleÄÚÐÍµÄ±äÁ¿»òº¯Êý¡£
+
+	ÔÚÅäÖÃÄÚºËµÄÊ±ºò°Ñ¸¡µãÄ£ÄâÆ÷Ñ¡ÉÏ£¬Ó¦¸ÃÊÇ¿ÉÒÔÖ§³ÖµÄ£¬µ«ÊÇËÙ¶È·Ç³£Âý¡£ 
+	ÎÒÔø¾­Óöµ½¹ý£¬Ó²¼þÃ÷Ã÷Ö§³Ö¸¡µãÔËËãµÄFPU£¬µ«ÊÇ±àÒëÄÚºËµÄÊ±ºòÑ¡ÉÏÁË¸¡µãÄ£ÄâÆ÷£¬½á¹ûËùÓÐµÄÓ¦ÓÃ³ÌÐòµÄ¸¡µãÔËËãËÙ¶È¶¼·Ç³£Âý¡£ËùÒÔÎÒ»³ÒÉÒªÖ§³Ö¸¡µãÖ»Òª±àÒëÄÚºËµÄÊ±ºòÑ¡ÉÏ£¬¶ÔÓÚÓ¦ÓÃ³ÌÐò²»ÐèÒªÔõÃ´¹ØÐÄ¡£
+
+	4) ÓëµÚÈýµãÒ»ÂöÏà³Ð£¬printf()¾­³£ÓÐÖØÈëºÍÐÔÄÜÉÏµÄÎÊÌâ¡£
+
+12	·ûºÅÀ©Õ¹µÄ´úÂëÀý×Ó£¨Code examples£©
+
+	ÏÂÃæµÄ´úÂëÊä³öÊÇÊ²Ã´£¿
+		void foo(void) {
+			unsigned int a = 6;
+			int b = -20;
+			 
+			(a+b > 6) ? puts(">6") : puts("<6");
+			printf("unsigned int a + int b = %x/n", (a + b));
+		}
+		/* unsigned int a + int b = fffffff2 */
+
+	Õâ¸öÎÊÌâ²âÊÔÄãÊÇ·ñ¶®µÃCÓïÑÔÖÐµÄÕûÊý×Ô¶¯×ª»»Ô­Ôò£¬ÎÒ·¢ÏÖÓÐÐ©¿ª·¢Õß¶®µÃ¼«ÉÙÕâÐ©¶«Î÷¡£²»¹ÜÈçºÎ£¬ÕâÎÞ·ûºÅÕûÐÍÎÊÌâµÄ´ð°¸ÊÇÊä³öÊÇ ">6"¡£Ô­ÒòÊÇµ±±í´ïÊ½ÖÐ´æÔÚÓÐ·ûºÅÀàÐÍºÍÎÞ·ûºÅÀàÐÍÊ±ËùÓÐµÄ²Ù×÷Êý¶¼×Ô¶¯×ª»»ÎªÎÞ·ûºÅÀàÐÍ¡£Òò´Ë-20±ä³ÉÁËÒ»¸ö·Ç³£´óµÄÕýÕûÊý£¬ËùÒÔ¸Ã±í´ïÊ½¼ÆËã³öµÄ½á¹û´óÓÚ6¡£ÕâÒ»µã¶ÔÓÚÆµ·±ÓÃµ½ÎÞ·ûºÅÊý¾ÝÀàÐÍµÄÇ¶ÈëÊ½ÏµÍ³£¨Ó²¼þ¼Ä´æÆ÷µÄÖµÈ«²¿ÊÇÎÞ·ûºÅµÄ£©À´ËµÊÇ·á³£ÖØÒªµÄ¡£Èç¹ûÄã´ð´íÁËÕâ¸öÎÊÌâ£¬ÄãÒ²¾Íµ½ÁËµÃ²»µ½Õâ·Ý¹¤×÷µÄ±ßÔµ¡£
+
+13	´¦ÀíÆ÷×Ö³¤µ¼ÖÂµÄÊý¾ÝÀ©Õ¹ÎÊÌâ
+
+	ÆÀ¼ÛÏÂÃæµÄ´úÂëÆ¬¶Î£º
+		unsigned int zero = 0;
+		unsigned int compzero = 0xFFFF;
+		/* 1's complement of zero */ 0µÄ²¹ÂëÎªÈ«1µÄÊý
+
+	¶ÔÓÚÒ»¸öintÐÍ²»ÊÇ16Î»µÄ´¦ÀíÆ÷ÎªËµ£¬ÉÏÃæµÄ´úÂëÊÇ²»ÕýÈ·µÄ¡£Ó¦±àÐ´ÈçÏÂ£º
+	unsigned int compzero = ~0;
+	ÕâÒ»ÎÊÌâÕæÕýÄÜ½ÒÂ¶³öÓ¦ÊÔÕßÊÇ·ñ¶®µÃ´¦ÀíÆ÷×Ö³¤µÄÖØÒªÐÔ£¨Ç¶ÈëÊ½Æ½Ì¨¿ÉÄÜÊÇ8¡¢16¡¢32µÄ£¬ÒÆÖ²µÄ½Ç¶ÈÀ´ËµÐ´³ö¹Ì¶¨µÄ0xFFFFÊÇ²»¶ÔµÄ£©¡£ÔÚÎÒµÄ¾­ÑéÀï£¬ºÃµÄÇ¶ÈëÊ½³ÌÐòÔ±·Ç³£×¼È·µØÃ÷°×Ó²¼þµÄÏ¸½ÚºÍËüµÄ¾ÖÏÞ£¬È»¶øPC»ú³ÌÐòÍùÍù°ÑÓ²¼þ×÷ÎªÒ»¸öÎÞ·¨±ÜÃâµÄ·³ÄÕ¡£
+
+	µ½ÁËÕâ¸ö½×¶Î£¬Ó¦ÊÔÕß»òÕßÍêÈ«´¹Í·É¥ÆøÁË»òÕßÐÅÐÄÂúÂúÖ¾ÔÚ±ØµÃ¡£Èç¹ûÏÔÈ»Ó¦ÊÔÕß²»ÊÇºÜºÃ£¬ÄÇÃ´Õâ¸ö²âÊÔ¾ÍÔÚÕâÀï½áÊøÁË¡£µ«Èç¹ûÏÔÈ»Ó¦ÊÔÕß×öµÃ²»´í£¬ÄÇÃ´ÎÒ¾ÍÈÓ³öÏÂÃæµÄ×·¼ÓÎÊÌâ£¬ÕâÐ©ÎÊÌâÊÇ±È½ÏÄÑµÄ£¬ÎÒÏë½ö½ö·Ç³£ÓÅÐãµÄÓ¦ÊÔÕßÄÜ×öµÃ²»´í¡£Ìá³öÕâÐ©ÎÊÌâ£¬ÎÒÏ£Íû¸ü¶à¿´µ½Ó¦ÊÔÕßÓ¦¸¶ÎÊÌâµÄ·½·¨£¨ºÜÖØÒªÅ¶£¬ÃæÊÔÕß¹Ø×¢µÄÊÇÄãË¼¿¼ÎÊÌâ½â¾öÎÊÌâµÄ¹ý³Ì£¬µ±Äã²»ÖªµÀ´ð°¸Ê±Ç§ÍòÇ§Íò²»Òª²ÂÒ»¸ö´ð°¸¸øËû£¬ÒòÎªÏÖÔÚ²»ÊÇÑ¡ÔñÌâ£¬ÃæÊÔ¹ÙÒªµÄÊÇ¹ý³Ì£¬ÄãÖ»ÐèÒª½«Äã¿¼ÂÇÎÊÌâµÄ¹ý³ÌËµÃ÷°×¾ÍOKÁË£©£¬¶ø²»ÊÇ´ð°¸¡£²»¹ÜÈçºÎ£¬Äã¾Íµ±ÊÇÕâ¸öÓéÀÖ°É...
+
+
+14	¶¯Ì¬ÄÚ´æ·ÖÅä£¨Dynamic memory allocation£©
+	
+	¾¡¹Ü²»Ïñ·ÇÇ¶ÈëÊ½¼ÆËã»úÄÇÃ´³£¼û£¬Ç¶ÈëÊ½ÏµÍ³»¹ÊÇÓÐ´Ó¶Ñ(heap)ÖÐ¶¯Ì¬·ÖÅäÄÚ´æµÄ¹ý³Ì¡£ÄÇÃ´Ç¶ÈëÊ½ÏµÍ³ÖÐ£¬¶¯Ì¬·ÖÅäÄÚ´æ¿ÉÄÜ·¢ÉúµÄÎÊÌâÊÇÊ²Ã´£¿ÕâÀï£¬ÎÒÆÚÍûÓ¦ÊÔÕßÄÜÌáµ½ÄÚ´æËéÆ¬£¬ËéÆ¬ÊÕ¼¯µÄÎÊÌâ£¬±äÁ¿µÄ³ÖÐÐÊ±¼äµÈµÈ¡£Õâ¸öÖ÷ÌâÒÑ¾­ÔÚESPÔÓÖ¾ÖÐ±»¹ã·ºµØÌÖÂÛ¹ýÁË£¨Ö÷ÒªÊÇ P.J. Plauger, ËûµÄ½âÊÍÔ¶Ô¶³¬¹ýÎÒÕâÀïÄÜÌáµ½µÄÈÎºÎ½âÊÍ£©£¬ËùÓÐ»Ø¹ýÍ·¿´Ò»ÏÂÕâÐ©ÔÓÖ¾°É£¡ÈÃÓ¦ÊÔÕß½øÈëÒ»ÖÖÐé¼ÙµÄ°²È«¸Ð¾õºó£¬ÎÒÄÃ³öÕâÃ´Ò»¸öÐ¡½ÚÄ¿£ºÏÂÃæµÄ´úÂëÆ¬¶ÎµÄÊä³öÊÇÊ²Ã´£¬ÎªÊ²Ã´£¿
+
+		char *ptr;
+		if ((ptr = (char *)malloc(0)) == NULL) 
+			puts("Got a null pointer");
+		else
+			puts("Got a valid pointer");
+	
+	ÕâÊÇÒ»¸öÓÐÈ¤µÄÎÊÌâ¡£×î½üÔÚÎÒµÄÒ»¸öÍ¬ÊÂ²»¾­Òâ°Ñ0Öµ´«¸øÁËº¯Êýmalloc£¬µÃµ½ÁËÒ»¸öºÏ·¨µÄÖ¸ÕëÖ®ºó£¬ÎÒ²ÅÏëµ½Õâ¸öÎÊÌâ¡£Õâ¾ÍÊÇÉÏÃæµÄ´úÂë£¬¸Ã´úÂëµÄÊä³öÊÇ"Got a valid pointer"¡£ÎÒÓÃÕâ¸öÀ´¿ªÊ¼ÌÖÂÛÕâÑùµÄÒ»ÎÊÌâ£¬¿´¿´±»ÃæÊÔÕßÊÇ·ñÏëµ½¿âÀý³ÌÕâÑù×öÊÇÕýÈ·£¨ÒòÎªÈç¹ûÉêÇëÊ§°Ü£¬Ôò³ÌÐò´¦ÀíÈÏÎªÄÚ´æ²»×ãÁË£¬Ò»°ã»áÖÕÖ¹³ÌÐò£¬ÊÇºÜÑÏÖØµÄÎÊÌâ£¿£©¡£µÃµ½ÕýÈ·µÄ´ð°¸¹ÌÈ»ÖØÒª£¬µ«½â¾öÎÊÌâµÄ·½·¨ºÍÄã×ö¾ö¶¨µÄ»ù±¾Ô­Àí¸üÖØÒªÐ©¡£
+	·µ»ØÒ»‚€¿ØÖ¸Õë»¹ÊÇÖ¸Ïò 0 ×Ö¹µÄÖ¸á˜ÉõÖÁÖ¸ÏòÒ»¸ö¿ÉÒÔ²Ù×÷µÄÖ¸Õë£¿
+	£¨È¡¾öÓÚÏµÍ³Æ½Ì¨µÄÊµÏÖ£¬C99¼°ÆäËû±ê×¼¹æ¶¨¿ÉÒÔ²»Í¬µÄ£©
+
+15	ÓÃTypedef¹¹Ôì¸´ºÏÀàÐÍ
+
+	ÔÚCÓïÑÔÖÐÆµ·±ÓÃÒÔÉùÃ÷Ò»¸öÒÑ¾­´æÔÚµÄÊý¾ÝÀàÐÍµÄÍ¬Òå×Ö¡£Ò²¿ÉÒÔÓÃÔ¤´¦ÀíÆ÷×öÀàËÆµÄÊÂ¡£
+		
+		#define dPS strcut s *
+		typedef struct s * tPS;
+	ÒÔÉÏÁ½ÖÖÇé¿öµÄÒâÍ¼¶¼ÊÇÒª¶¨ÒådPS ºÍtPS ×÷ÎªÒ»¸öÖ¸Ïò½á¹¹sÖ¸Õë¡£ÄÄÖÖ·½Ê½¸üºÃÄØ£¿
+
+	ÕâÊÇÒ»¸ö·Ç³£Î¢ÃîµÄÎÊÌâ£¬ÈÎºÎÈË´ð¶ÔÕâ¸öÎÊÌâ£¨Õýµ±µÄÔ­ÒòÅ¶£¬¶ø²»ÊÇ²Â£¬Èç¹ûÄãÃ»ÓÐÔ­Òò£¬Ëµ²»»á±È²ÂÒ»¸ö´ð°¸ÒªºÃµÄ¶à£¬¼Ç×¡°¡£¬Ëµ»°ÊÇÒª½²¸ù¾ÝµÄ£©ÊÇÓ¦µ±±»¹§Ï²µÄ¡£´ð°¸ÊÇ£ºtypedef¸üºÃ¡£Ë¼¿¼ÏÂÃæµÄÀý×Ó£º
+		
+		dPS p1, p2;
+		tPS p3, p4;
+	µÚÒ»¸öÀ©Õ¹Îª 
+		struct * p1, p2;
+
+	ÉÏÃæµÄ´úÂë¶¨Òåp1ÎªÒ»¸öÖ¸Ïò½á¹¹µÄÖ¸Õë£¬p2ÎªÒ»¸öÊµ¼ÊµÄ½á¹¹£¬ÕâÒ²Ðí²»ÊÇÄãÏëÒªµÄ¡£µÚ¶þ¸öÀý×ÓÕýÈ·µÚ¶¨ÒåÁËp3ºÍp4Á½¸öÖ¸Õë¡£
+
+16	»ÞÉ¬µÄÓï·¨¼°´úÂë·ç¸ñ
+
+	CÓïÑÔÍ¬ÒâÒ»Ð©ÁîÈËÕð¾ªµÄ½á¹¹,ÏÂÃæµÄ½á¹¹ÊÇºÏ·¨µÄÂð£¬Èç¹ûÊÇËü×öÐ©Ê²Ã´£¿
+		int a = 5, b = 7, c;
+		c = a+++b;
+	Õâ¸öÎÊÌâ½«×÷ÎªÕâ¸ö²âÑéµÄÒ»¸öÓä¿ìµÄ½áÎ²¡£²»¹ÜÄãÏà²»ÏàÐÅ£¬ÉÏÃæµÄÀý×ÓÊÇÍêÈ«ºÏºõÓï·¨µÄ¡£ÎÊÌâÊÇ±àÒëÆ÷ÈçºÎ´¦ÀíËü£¿Ë®Æ½²»¸ßµÄ±àÒë×÷ÕßÊµ¼ÊÉÏ»áÕùÂÛÕâ¸öÎÊÌâ£¬±àÒëÆ÷Ó¦¾¡¿ÉÄÜ¶àµÄ´Ó×óÖÁÓÒ½«Èô¸É¸ê×Ö·û×é³ÉÒ»¸öÔËËã·û¡£Òò´Ë£¬ÉÏÃæµÄ´úÂë±»´¦Àí³É£º c = a++ + b;
+	¶¼ºÃ±í´ïÊ½ÒÀ´Î¶ÔÃ¿¸ö±í´ïÊ½¼ÆËã£¬×îºóµÄ½á¹ûÎª×îºóÒ»¸ö±í´ïÊ½µÄÖµ¡£Òò´Ë£¬Ö´ÐÐºó a = 6, b = 7, c = 12¡£
+
+	Èç¹ûÄãÖªµÀ´ð°¸£¬»ò²Â³öÕýÈ·´ð°¸£¬×öµÃºÃ¡£Èç¹ûÄã²»ÖªµÀ´ð°¸£¬ÎÒÒ²²»°ÑÕâ¸öµ±×÷ÎÊÌâ¡£ÎÒ·¢ÏÖÕâ¸öÎÊÌâµÄ×î´óºÃ´¦ÊÇÕâÊÇÒ»¸ö¹ØÓÚ´úÂë±àÐ´·ç¸ñ£¨ÒªÃ÷È·µÄ¼ÓÉÏÀ¨ºÅ£¬±ÜÃâÆçÒå»òÕß±àÒëÆ÷²»Í¬´øÀ´µÄ²îÒì£©£¬´úÂëµÄ¿É¶ÁÐÔ£¬´úÂëµÄ¿ÉÐÞ¸ÄÐÔµÄºÃµÄ»°Ìâ¡£
+
+
+####################################################
+
+	×¢£º
+	Òý³ö´úÂë·ç¸ñµÄÎÊÌâÕýÊÇ×÷ÕßÎÊ´ËÎÊÌâµÄÄ¿µÄ£¬Õâ¸æËßÎÒÃÇÒª´§Ä¦ÃæÊÔ¹ÜÃ¿¸öÎÊÌâ±³ºóÒþ²ØµÄ¿¼²éµã£¬ÄÜ¹»³Ã»ú·¢»ÓÏÂ¾Í´ó¹¦¸æ³ÉÁË£¡
